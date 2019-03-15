@@ -198,6 +198,18 @@
                         </li>
                         <li class="has-sub">
                             <a class="js-arrow" href="#">
+                                <i class="fas fa-table"></i>CRM<i class="fas fa-caret-down caret"></i></a>
+                            <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                <li>
+                                    <a href="add_customer.php">Add Customer</a>
+                                </li>
+                                <li>
+                                    <a href="view_customer.php">Customer List</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#">
                                 <i class="far fa-check-square"></i>Loss/Profit<i class="fas fa-caret-down caret"></i></a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>

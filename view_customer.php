@@ -1,7 +1,7 @@
 <?php
 require_once('include\db_connect.php');
 ?>
-<?php require 'include/header.php' ?>
+<?php require 'include\header.php' ?>
             <!-- HEADER DESKTOP-->
 
             <!-- MAIN CONTENT-->
@@ -14,16 +14,17 @@ require_once('include\db_connect.php');
                                 <!-- DATA TABLE-->
                                 <div class="table-responsive m-b-40">
                                     <table class="table table-borderless table-data3">
-                                        <h3>Product Table</h3>
+                                        <h3>Company/Customer Table</h3>
                                         <br>
                                         <thead>
                                             <tr>
                                                 <th>SL NO</th>
-                                                <th>Product Name</th>
-                                                <th>Product Description</th>
-                                                <th>Product Unit</th>
-                                                <th>Product Images</th>
-                                                <th colspan="2" style="text-align: center;">Action</th>                               
+                                                <th>Company Name</th>
+                                                <th>Customer Name</th>
+                                                <th>Phone No 1</th>
+                                                <th>Phone No 2</th>
+                                                <th>Address</th>
+                                                <th colspan="3" style="text-align: center;">Action</th>                               
                                             </tr>
                                         </thead>
 
@@ -33,7 +34,7 @@ require_once('include\db_connect.php');
 
 
                                                 $result_per_page=5;
-                                                $query="select * from product";
+                                                $query="select * from customer";
                                                 $query_run=mysqli_query($connect, $query);
                                                 $number_of_result=mysqli_num_rows($query_run);
                                                 $number_of_page=ceil($number_of_result/$result_per_page);
@@ -45,7 +46,7 @@ require_once('include\db_connect.php');
                                                 echo '<span style="color:blue">You are on Page </span><b>'. $page.'</b><br>';
 
                                                 $starting_limit_num=($page-1)*$result_per_page;
-                                                $query="select * from product limit " .$starting_limit_num.",".$result_per_page;
+                                                $query="select * from customer limit " .$starting_limit_num.",".$result_per_page;
                                                 $query_run=mysqli_query($connect , $query);
 
                                                 
@@ -63,10 +64,12 @@ require_once('include\db_connect.php');
                                             <tr>
 
                                                 <td><?php echo $counter; ?></td>
-                                                <td><?php echo $row['product_name']; ?></td>
-                                                <td><?php echo $row['product_description']; ?></td>
-                                                <td><?php echo $row['product_unit']; ?></td>
-                                                <td><?php echo $row['product_image']; ?></td>
+                                                <td><?php echo $row['company_name']; ?></td>
+                                                <td><?php echo $row['customer_name']; ?></td>
+                                                <td><?php echo $row['phn_no_1']; ?></td>
+                                                <td><?php echo $row['address']; ?></td>
+
+                                                <td><a href="#"><button type="button" class="btn btn-info">Details</button></a></td>
 
                                                 <td><a href="inc.process\edit_product_process.php?id=<?php echo $row['id']; ?>"><button type="button" class="btn btn-success">Edit</button></a></td>
 
