@@ -15,6 +15,11 @@ function fill_unit_select_box($connect)
  }
  return $output;
 }
+$month = date('m');
+$day = date('d');
+$year = date('Y');
+
+$today = $year . '-' . $month . '-' . $day;
 
 ?>
 <?php $currentPage = 'add_product'; include 'include/header.php' ?>
@@ -27,7 +32,7 @@ function fill_unit_select_box($connect)
                                         <!-- DATA TABLE-->
                                         <div class="table-responsive m-b-40">
                                             <div class="col-lg-7">
-                                        <div class="card">
+                                        <div class="card m-t-70">
                                             <div class="card-header">Purchase Information</div>
                                             <div class="card-body">
                                                 <div class="card-title">
@@ -37,9 +42,9 @@ function fill_unit_select_box($connect)
                                                 
                                                     <div class="row">
                                                         <div class="col-12">
-                                                            <label for="company_name" class="control-label mb-1">Company Name</label>
+                                                            <label for="supplier_name" class="control-label mb-1">Supplier Name</label>
                                                             <div class="input-group">
-                                                                <input id="company_name" name="company_name" type="text" class="form-control">
+                                                                <input id="supplier_name" name="supplier_name" type="text" class="form-control">
                                                             </div>
                                                         </div>
                                                         <!-- <div class="col-6">
@@ -67,7 +72,7 @@ function fill_unit_select_box($connect)
                                                         <div class="col-6">
                                                             <div class="form-group">
                                                                 <label for="order_date" class="control-label mb-1">Order Date</label>
-                                                                <input id="order_date" name="order_date" type="date" class="form-control">
+                                                                <input id="order_date" name="order_date" type="date" class="form-control" value="<?php echo $today; ?>" >
                                                                 
                                                             </div>
                                                         </div>
@@ -82,8 +87,8 @@ function fill_unit_select_box($connect)
                                                     <tr>
                                                         <th>Product Name</th>
                                                         <th>Quantity</th>
-                                                        <th>Unit Price</th>
-                                                        <th>Total</th>
+                                                        <th>Buy Price</th>
+                                                        <th>Sale Price</th>
                                                         <th></th>
                                                         
                                                     </tr>
@@ -91,7 +96,7 @@ function fill_unit_select_box($connect)
                                                 <tbody>
                                                     
                                                 </tbody>
-                                                <tfoot>
+                                                <!-- <tfoot>
                                                     <tr>
                                                         <td>Sub Total</td>
                                                         <td><input type="number" name="t_ream" class="t_ream" value=""placeholder="Total Ream" readonly=""></td>
@@ -101,7 +106,7 @@ function fill_unit_select_box($connect)
                                                         
                                                     </tr>
                                                     
-                                                </tfoot>
+                                                </tfoot> -->
                                                 
                                             </table>
                                         </div>
@@ -138,15 +143,15 @@ function fill_unit_select_box($connect)
 <?php require 'include/footer.php' ?>
 <!-- end document-->
 <script>
-$(document).ready(function(){
+  $(document).ready(function(){
  
  $(document).on('click', '.add', function(){
   var html = '';
   html += '<tr>';
   html += '<td><select name="product_name[]" class="pu-input product_name"><option value="">--Select--</option><?php echo fill_unit_select_box($connect); ?></select></td>';
-  html += '<td><input type="text" name="ream[]" class="pu-input ream"></td>';
-  html += '<td><input type="text" name="unit_price[]" class="pu-input unit_price"></td>';
-  html += '<td><input type="text" name="total[]" class="pu-input total"></td>';
+  html += '<td><input type="text" name="qty[]" class="pu-input ream"></td>';
+  html += '<td><input type="text" name="buy_price[]" class="pu-input unit_price"></td>';
+  html += '<td><input type="text" name="sale_price[]" class="pu-input total"></td>';
   html += '<td><button type="button" name="remove" class="btn btn-danger btn-sm remove"><span><i class="fas fa-minus"></i></span></button></td></tr>';
 $('#item_table').append(html);
  });
@@ -156,31 +161,31 @@ $('#item_table').append(html);
  });
 
 
-$('table').on('keyup', 'input', function(){ // run anytime the value changes
-    $thisRow = $(this).parent().parent();console.log($thisRow.find('td>.total'));
-    var ream  = Number($thisRow.find('td>.ream').val());   // get value of field
-    var price = Number($thisRow.find('td>.unit_price').val()); // convert it to a float
+// $('table').on('keyup', 'input', function(){ // run anytime the value changes
+//     $thisRow = $(this).parent().parent();console.log($thisRow.find('td>.total'));
+//     var ream  = Number($thisRow.find('td>.ream').val());   // get value of field
+//     var price = Number($thisRow.find('td>.unit_price').val()); // convert it to a float
 
-    $thisRow.find('td>.total').val(ream * price);
+//     $thisRow.find('td>.total').val(ream * price);
 
-  });
+//   });
 // Subtotal of values ream
-$(document).on("change", ".ream", function() {
-    var sum = 0;
-    $(".ream").each(function(){
-        sum += +$(this).val();
-    });
-    $(".t_ream").val(sum);
-});
+// $(document).on("change", ".ream", function() {
+//     var sum = 0;
+//     $(".ream").each(function(){
+//         sum += +$(this).val();
+//     });
+//     $(".t_ream").val(sum);
+// });
 
 // Subtotal of values total
-$(document).on("change", ".total", function() {
-    var sum = 0;
-    $(".total").each(function(){
-        sum += +$(this).val();
-    });
-    $(".subt").val(sum);
-});
+// $(document).on("change", ".total", function() {
+//     var sum = 0;
+//     $(".total").each(function(){
+//         sum += +$(this).val();
+//     });
+//     $(".subt").val(sum);
+// });
  $('#insert_form').on('submit', function(event){
   event.preventDefault();
   var error = '';
@@ -237,10 +242,9 @@ $(document).on("change", ".total", function() {
    $('#error').html('<div class="alert alert-danger">'+error+'</div>');
   }
  });
+
+ 
     
 
 });
-
-
-
 </script>
