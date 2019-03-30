@@ -14,11 +14,8 @@ $id=$_GET['id'];
 							$query1_run=mysqli_query($connect , $query1);
 							while($row=mysqli_fetch_array($query1_run)){
 								$product_name=$row['product_name'];
-								$product_color=$row['product_color'];
-								$product_gsm=$row['product_gsm'];
-								$unit_price=$row['unit_price'];
-								$product_width=$row['product_width'];
-								$product_height=$row['product_height'];
+								$product_description=$row['product_description'];
+								
 							}
                             ?>
                                 <form action="edit_product_process_func.php?id=<?php echo $id; ?>" method="POST">
@@ -36,32 +33,10 @@ $id=$_GET['id'];
                                                 <input id="product_name" name="product_name" type="text" class="form-control" value="<?php echo $product_name; ?>" >
                                             </div>
                                             <div class="form-group has-success">
-                                                <label for="product_color" class="control-label mb-1">Product Color</label>
-                                                <input id="product_color" name="product_color" type="text" class="form-control " value="<?php echo $product_color; ?>">
+                                                <label for="product_description" class="control-label mb-1">Product Description</label>
+                                                <input id="product_description" name="product_description" type="text" class="form-control " value="<?php echo $product_description; ?>">
                                             </div>
-                                            <div class="form-group has-success">
-                                                <label for="product_gsm" class="control-label mb-1">GSM</label>
-                                                <input id="product_gsm" name="product_gsm" type="text" class="form-control " value="<?php echo $product_gsm; ?>">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="unit_price" class="control-label mb-1">Unit Price</label>
-                                                <input id="unit_price" name="unit_price" type="text" class="form-control " value="<?php echo $unit_price; ?>">
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-6">
-                                                    <div class="form-group">
-                                                        <label for="product_width" class="control-label mb-1">Width</label>
-                                                        <input id="product_width" name="product_width" type="text" class="form-control " value="<?php echo $product_width; ?>">
-                                                    </div>
-                                                </div>
-                                                <div class="col-6">
-                                                    <label for="product_height" class="control-label mb-1">Height</label>
-                                                    <div class="input-group">
-                                                        <input id="product_height" name="product_height" type="text" class="form-control " value="<?php echo $product_height; ?>">
-
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            
                                             <div>
                                                 <button id="payment-button" type="submit" name="submit" class="btn btn-lg btn-info btn-block">
                                                     <i class="fa fa-lock fa-lg"></i>&nbsp;

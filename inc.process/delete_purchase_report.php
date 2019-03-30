@@ -1,4 +1,3 @@
-
 <?php
 require_once('header.php');
 require_once('footer.php');
@@ -10,10 +9,10 @@ $id=$_GET['id'];
             <!-- Start to Copy From Here -->
                 <div class="row m-t-30">
                 <div class="col-md-12">
-                	<h3>Do You want To Delete This Product??</h3>
+                	<h3>Do You want To Delete This Purchase Info??</h3>
                 	<br>
                    
-                   	<button class="btn btn-danger" ><a href="delete_product_func.php?id=<?php echo $id; ?>" style="color:white">Delete</a> </button>
+                   	<button class="btn btn-danger" ><a href="delete_purchase_report_func.php?id=<?php echo $id; ?>" style="color:white">Delete</a> </button>
                    
                 </div>
             </div>

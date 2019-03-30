@@ -70,7 +70,7 @@ require_once('include\db_connect.php');
 
                                                 <td><a href="inc.process\edit_product_process.php?id=<?php echo $row['id']; ?>"><button type="button" class="btn btn-success">Edit</button></a></td>
 
-                                                <td><a href="#"><button type="button" class="btn btn-danger">Delete</button></a></td>
+                                                <td ><a  class="btn btn-danger" href="inc.process/delete_product.php?id=<?php echo $row['id']; ?>"  >Delete</a></td>
                                                 
 
                                             <?php  
