@@ -56,9 +56,7 @@ require_once('include\db_connect.php');
                                                             <a href="inc.process/edit_purchase_report_process.php?id=<?php echo $row['id']; ?>"><button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button></a>
                                                            
                                                         </td>
-                                                        <td>
-                                                             <a href="inc.process/delete_purchase_report.php?id=<?php echo $row['id']; ?>"><button type="button" class="btn btn-danger" ><i class="fas fa-trash-alt"></i></button></a>
-                                                        </td>
+
                                                         
                                                         
 
