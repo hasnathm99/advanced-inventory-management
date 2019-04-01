@@ -18,7 +18,7 @@ if (isset($_POST["getNewOrderItem"])) {
 		            ?>
 		        </select>
 		    </td>
-		    <td><input name="tqty[]" readonly type="text" class="form-control form-control-sm tqty"></td>   
+		    <!-- <td><input name="tqty[]" readonly type="text" class="form-control form-control-sm tqty" value="5"></td> -->   
 		    <td><input name="qty[]" type="text" class="form-control form-control-sm qty" required></td>
 		    <td><input name="price[]" type="text" class="form-control form-control-sm price" ></span>
 		    <span><input name="pro_name[]" type="hidden" class="form-control form-control-sm pro_name"></td>

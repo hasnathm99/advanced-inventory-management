@@ -1,5 +1,18 @@
 <?php
 $connect = new PDO("mysql:host=localhost;dbname=inventory_management_system", "root", "");
+function fill_unit_select_box($connect)
+{ 
+ $output = '';
+ $query = "SELECT * FROM product";
+ $statement = $connect->prepare($query);
+ $statement->execute();
+ $result = $statement->fetchAll();
+ foreach($result as $row)
+ {
+  $output .= '<option value="'.$row["product_name"].'">'.$row["product_name"].'</option>';
+ }
+ return $output;
+}
 function fill_customer_box($connect)
 { 
  $output = '';
@@ -50,7 +63,7 @@ function fill_customer_box($connect)
                                         <tr>
                                           <th>#</th>
                                           <th style="text-align:center;">Item Name</th>
-                                          <th style="text-align:center;">Total Quantity</th>
+                                          
                                           <th style="text-align:center;">Quantity</th>
                                           <th style="text-align:center;">Price</th>
                                           <th>Total</th>
@@ -69,6 +82,20 @@ function fill_customer_box($connect)
                                             <td><input name="price[]" type="text" class="form-control form-control-sm" readonly></td>
                                             <td>Rs.1540</td>
                                         </tr> -->
+                                        <tr>
+                                              <td><b class="number">1</b></td>
+                                              <td>
+                                                  <select name="pid[]" class="form-control form-control-sm pid" required>
+                                                      <option value="">Choose Product</option>
+                                                      <?php echo fill_unit_select_box($connect); ?>
+                                                  </select>
+                                              </td>
+                                              <!-- <td><input name="tqty[]" readonly type="text" class="form-control form-control-sm tqty" value="5"></td> -->   
+                                              <td><input name="qty[]" type="text" class="form-control form-control-sm qty" required></td>
+                                              <td><input name="price[]" type="text" class="form-control form-control-sm price" ></span>
+                                              <span><input name="pro_name[]" type="hidden" class="form-control form-control-sm pro_name"></td>
+                                              <td>TK.<span class="amt">0</span></td>
+                                        </tr>
                                       </tbody>
                                   </table> <!--Table Ends-->
                                   <!-- <center style="padding:10px;">
@@ -136,67 +163,64 @@ function fill_customer_box($connect)
 <script>
   $(document).ready(function(){
 
-    addNewRow();
+    // addNewRow();
 
-    $("#add").click(function(){
-      addNewRow();
-    })
+    // $("#add").click(function(){
+    //   addNewRow();
+    // })
 
-    function addNewRow(){
-      $.ajax({
-        url :"process.php",
-        method : "POST",
-        data : {getNewOrderItem:1},
-        success : function(data){
-          $("#invoice_item").append(data);
-          var n = 0;
-          $(".number").each(function(){
-            $(this).html(++n);
-          })
-        }
-      })
-    }
+    // function addNewRow(){
+    //   $.ajax({
+    //     url :"process.php",
+    //     method : "POST",
+    //     data : {getNewOrderItem:1},
+    //     success : function(data){
+    //       $("#invoice_item").append(data);
+    //       var n = 0;
+    //       $(".number").each(function(){
+    //         $(this).html(++n);
+    //       })
+    //     }
+    //   })
+    // }
 
-    $("#remove").click(function(){
-      $("#invoice_item").children("tr:last").remove();
-      calculate(0,0);
-    })
-    $("#invoice_item").delegate(".pid","change",function(){
+    // $("#remove").click(function(){
+    //   $("#invoice_item").children("tr:last").remove();
+    //   calculate(0,0);
+    // })
+    $("#invoice_item").delegate(".price","keyup",function(){
       var pid = $(this).val();
       var tr = $(this).parent().parent();
       $(".overlay").show();
-      $.ajax({
-        url :"process.php",
-        method : "POST",
-        dataType : "json",
-        data : {getPriceAndQty:1,id:pid},
-        success : function(data){
-          tr.find(".tqty").val(data["stock"]);
-          tr.find(".pro_name").val(data["product_name"]);
-          tr.find(".qty").val(1);
-          tr.find(".price").val(data["sale_price"]);
+      // $.ajax({
+      //   url :"process.php",
+      //   method : "POST",
+      //   dataType : "json",
+      //   data : {getPriceAndQty:1,id:pid},
+      //   success : function(data){
+          
           tr.find(".amt").html( tr.find(".qty").val() * tr.find(".price").val() );
-          calculate(0,0);
-        }
-      })
+          
+      //   }
+      // })
     });
-    $("#invoice_item").delegate(".qty","keyup",function(){
-      var qty = $(this);
-      var tr = $(this).parent().parent();
-      if (isNaN(qty.val())) {
-        alert("Please enter a valid quantity");
-        qty.val(1);
-      }else{
-        if ((qty.val() - 0) > (tr.find(".tqty").val()-0)) {
-          alert("Sorry ! This much of quantity is not available");
-          aty.val(1);
-        }else{
-          tr.find(".amt").html(qty.val() * tr.find(".price").val());
-          calculate(0,0);
-        }
-      }
+    // $("#invoice_item").delegate(".qty","keyup",function(){
+    //   var qty = $(this);
+    //   var tr = $(this).parent().parent();
+    //   if (isNaN(qty.val())) {
+    //     alert("Please enter a valid quantity");
+    //     qty.val(1);
+    //   }else{
+    //     if ((qty.val() - 0) > (tr.find(".tqty").val()-0)) {
+    //       alert("Sorry ! This much of quantity is not available");
+    //       aty.val(1);
+    //     }else{
+    //       tr.find(".amt").html(qty.val() * tr.find(".price").val());
+    //       calculate(0,0);
+    //     }
+    //   }
 
-    });
+    // });
     function calculate(dis,paid){
       var sub_total = 0;
       var net_total = 0;
@@ -231,32 +255,32 @@ function fill_customer_box($connect)
       calculate(discount,paid);
     });
 
-    $("#order_form").click(function(){
+  //   $("#order_form").click(function(){
 
     
 
-    if ($("#cust_name").val() === "") {
-      alert("Please Enter Customer Name");
-    }else if($("#paid").val() === ""){
-      alert("Please Enter Paid Amount");
-    }else{
-      $.ajax({
-        url : "process.php",
-        method : "POST",
-        data : $("#get_order_data").serialize(),
-        success : function(data){
+  //   if ($("#cust_name").val() === "") {
+  //     alert("Please Enter Customer Name");
+  //   }else if($("#paid").val() === ""){
+  //     alert("Please Enter Paid Amount");
+  //   }else{
+  //     $.ajax({
+  //       url : "process.php",
+  //       method : "POST",
+  //       data : $("#get_order_data").serialize(),
+  //       success : function(data){
 
-          if (data === "ORDER_COMPLETED") {
-            window.location.href = "add_sales.php";
+  //         if (data === "ORDER_COMPLETED") {
+  //           window.location.href = "add_sales.php";
            
-          }
-        }
-      });
-    }
+  //         }
+  //       }
+  //     });
+  //   }
 
     
 
-  });
+  // });
 
   });
 </script>
