@@ -95,11 +95,4 @@ $id=$_GET['id'];
             <!-- END MAIN CONTENT-->
             <!-- END PAGE CONTAINER-->
         <?php require 'footer.php' ?>
-         <script >
-        $(function() {
-            $("#ream, #unit_price").on("keydown keyup", sum);
-          function sum() {
-          $("#total").val(Number($("#ream").val()) * Number($("#unit_price").val()));
-          }
-        });
-    </script>
+

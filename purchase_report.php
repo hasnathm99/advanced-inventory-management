@@ -57,7 +57,7 @@ require_once('include\db_connect.php');
                                                            
                                                         </td>
                                                         <td>
-                                                             <a href="inc.process/delete_product.php?id=<?php echo $row['id']; ?>"><button type="button" class="btn btn-danger" onclick=" return confirm('Sure you want to delete???');" ><i class="fas fa-trash-alt"></i></button></a>
+                                                             <a href="inc.process/delete_purchase_report.php?id=<?php echo $row['id']; ?>"><button type="button" class="btn btn-danger" ><i class="fas fa-trash-alt"></i></button></a>
                                                         </td>
                                                         
                                                         
