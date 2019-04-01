@@ -2,14 +2,16 @@
 require_once('db_connect.php');
 
 if(isset($_POST['submit'])){
-	if (isset($_POST['product_name']) and isset($_POST['product_description']) and isset($_POST['product_unit']) ) {
+	if (isset($_POST['product_name']) and isset($_POST['buy_price']) and isset($_POST['sale_price']) ) {
 		$product_name=$_POST['product_name'];
 		$product_description=$_POST['product_description'];
 		$product_unit=$_POST['product_unit'];
-		$product_image="Comming Soon";
+		$buy_price=$_POST['buy_price'];
+		$sale_price=$_POST['sale_price'];
+		$stock=$_POST['stock'];
 		
 
-		$query="insert into product(product_name, product_description, product_unit, product_image) values('$product_name' , '$product_description' , '$product_unit' , '$product_image')";
+		$query="insert into product(product_name, product_description, product_unit, buy_price,sale_price, stock) values('$product_name' , '$product_description' , '$product_unit' , '$buy_price', '$sale_price', '$stock')";
 		$query_run=mysqli_query($connect ,$query );
 		if($query_run){
 			$message="Product Added Successfully";

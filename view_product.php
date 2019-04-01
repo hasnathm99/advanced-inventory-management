@@ -22,7 +22,9 @@ require_once('include\db_connect.php');
                                                 <th>Product Name</th>
                                                 <th>Product Description</th>
                                                 <th>Product Unit</th>
-                                                <th>Product Images</th>
+                                                <th>Buy Price</th>
+                                                <th>Sale Price</th>
+                                                <th>Stock</th>
                                                 <th colspan="2" style="text-align: center;">Action</th>                               
                                             </tr>
                                         </thead>
@@ -66,8 +68,9 @@ require_once('include\db_connect.php');
                                                 <td><?php echo $row['product_name']; ?></td>
                                                 <td><?php echo $row['product_description']; ?></td>
                                                 <td><?php echo $row['product_unit']; ?></td>
-                                                <td><?php echo $row['product_image']; ?></td>
-
+                                                <td><?php echo $row['buy_price']; ?></td>
+                                                <td><?php echo $row['sale_price']; ?></td>
+                                                <td><?php echo $row['stock']; ?></td>
                                                 <td><a href="inc.process\edit_product_process.php?id=<?php echo $row['id']; ?>"><button type="button" class="btn btn-success">Edit</button></a></td>
 
                                                 <td><a href="#"><button type="button" class="btn btn-danger">Delete</button></a></td>

@@ -1,6 +1,18 @@
 <?php
-include_once("./include/db_connect.php");
-
+$connect = new PDO("mysql:host=localhost;dbname=inventory_management_system", "root", "");
+function fill_customer_box($connect)
+{ 
+ $output = '';
+ $query = "SELECT * FROM customer";
+ $statement = $connect->prepare($query);
+ $statement->execute();
+ $result = $statement->fetchAll();
+ foreach($result as $row)
+ {
+  $output .= '<option value="'.$row["customer_name"].'">'.$row["customer_name"].'</option>';
+ }
+ return $output;
+}
 ?>
 
 <?php $currentPage = 'add_sales'; include 'include/header.php' ?>
@@ -22,7 +34,10 @@ include_once("./include/db_connect.php");
                     <div class="form-group row">
                       <label class="col-sm-3 col-form-label" align="right">Customer Name*</label>
                       <div class="col-sm-6">
-                        <input type="text" id="cust_name" name="cust_name"class="form-control form-control-sm" placeholder="Enter Customer Name" required/>
+                        <select name="customer_name" id="company_name">
+                          <option class="pu-input" value="" disabled selected>--select--</option>
+                          <?php echo fill_customer_box($connect); ?>
+                        </select>
                       </div>
                     </div>
 
@@ -35,7 +50,7 @@ include_once("./include/db_connect.php");
                                         <tr>
                                           <th>#</th>
                                           <th style="text-align:center;">Item Name</th>
-                                          <!-- <th style="text-align:center;">Total Quantity</th> -->
+                                          <th style="text-align:center;">Total Quantity</th>
                                           <th style="text-align:center;">Quantity</th>
                                           <th style="text-align:center;">Price</th>
                                           <th>Total</th>
@@ -56,10 +71,10 @@ include_once("./include/db_connect.php");
                                         </tr> -->
                                       </tbody>
                                   </table> <!--Table Ends-->
-                                  <center style="padding:10px;">
+                                  <!-- <center style="padding:10px;">
                                     <button id="add" style="width:150px;" class="btn btn-success">Add</button>
                                     <button id="remove" style="width:150px;" class="btn btn-danger">Remove</button>
-                                  </center>
+                                  </center> -->
                       </div> <!--Crad Body Ends-->
                     </div> <!-- Order List Crad Ends-->
 
@@ -156,7 +171,7 @@ include_once("./include/db_connect.php");
         dataType : "json",
         data : {getPriceAndQty:1,id:pid},
         success : function(data){
-          tr.find(".tqty").val(data["qty"]);
+          tr.find(".tqty").val(data["stock"]);
           tr.find(".pro_name").val(data["product_name"]);
           tr.find(".qty").val(1);
           tr.find(".price").val(data["sale_price"]);
@@ -214,6 +229,34 @@ include_once("./include/db_connect.php");
       var paid = $(this).val();
       var discount = $("#discount").val();
       calculate(discount,paid);
-    })
+    });
+
+    $("#order_form").click(function(){
+
+    
+
+    if ($("#cust_name").val() === "") {
+      alert("Please Enter Customer Name");
+    }else if($("#paid").val() === ""){
+      alert("Please Enter Paid Amount");
+    }else{
+      $.ajax({
+        url : "process.php",
+        method : "POST",
+        data : $("#get_order_data").serialize(),
+        success : function(data){
+
+          if (data === "ORDER_COMPLETED") {
+            window.location.href = "add_sales.php";
+           
+          }
+        }
+      });
+    }
+
+    
+
+  });
+
   });
 </script>
