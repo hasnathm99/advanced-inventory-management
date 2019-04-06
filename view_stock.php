@@ -1,5 +1,5 @@
 <?php
-require_once('include\db_connect.php');
+require_once('include/db_connect.php');
 ?>
 <?php require 'include/header.php' ?>
             <!-- HEADER DESKTOP-->
@@ -20,14 +20,13 @@ require_once('include\db_connect.php');
                                             <tr>
                                                 <th>SL No</th>
                                                 <th>Product Name</th>
-                                                <th>Toatl Unit</th>
-                                                <!-- <th colspan="2" style="text-align: center;">Action</th> -->                               
+                                                <th>Toatl Unit</th>                              
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php
                                             $counter=0;
-                                            $query="select product_name, sum(ream) from purchase group by product_name";
+                                            $query="select product_name,unit_type, total_qty from product group by product_name";
                                             $query_run=mysqli_query($connect, $query);
                                             while($row=mysqli_fetch_array($query_run)){
                                                 $counter++;
@@ -36,7 +35,7 @@ require_once('include\db_connect.php');
                                             <tr>
                                                 <td><?php echo $counter; ?></td>
                                             <td><?php echo $row['product_name'] ?></td>
-                                                <td><?php echo $row['sum(ream)']; ?></td>
+                                                <td><?php echo $row['total_qty']. ' ' . $row['unit_type']; ?></td>
                                                                                          
                                             </tr>
                                             <?php } ?>
@@ -47,7 +46,7 @@ require_once('include\db_connect.php');
                                 <br>
                                 <!-- END DATA TABLE-->
                                 <!-- calculation -->
-                                <form action="inc.process\add_product_process.php" method="POST">
+                                <form action="inc.process/add_product_process.php" method="POST">
                                     <div class="col-lg-10">
                                 <div class="card">
                                     <div class="card-header"><b>Calculate Stock Price</b></div>

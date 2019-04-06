@@ -1,3 +1,17 @@
+<?php
+ob_start();
+session_start();
+
+if(!isset($_SESSION['user_id'])){
+  echo '<h2 style="color:#C9302C">Log in First<h2>';
+  header('Location: login.php');
+  die();
+ }
+require_once('db_connect.php');
+$user_id=$_SESSION['user_id'];
+$user_name=$_SESSION['user_name'];
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,7 +56,7 @@
                 <div class="container-fluid">
                     <div class="header-mobile-inner">
                         <a class="logo" href="index.html">
-                            <h3>Sharif Stationary</h3>
+                            <h3>Shop Management</h3>
                         </a>
                         <button class="hamburger hamburger--slider" type="button">
                             <span class="hamburger-box">
@@ -55,11 +69,11 @@
             <nav class="navbar-mobile">
                 <div class="container-fluid">
                     <ul class="navbar-mobile__list list-unstyled">
-                        <li class="has-sub">
+                        <!-- <li class="has-sub">
                             <a class="js-arrow" href="#">
                                 <i class="fas fa-tachometer-alt"></i>Dashboard</a>
                             
-                        </li>
+                        </li> -->
                         <li>
                             <a href="chart.html">
                                 <i class="fas fa-chart-bar"></i>Product</a>
@@ -134,19 +148,19 @@
             <div class="menu-sidebar__content js-scrollbar1">
                 <nav class="navbar-sidebar">
                     <ul class="list-unstyled navbar__list">
-                        <li class=" has-sub">
-                            <a class="<?php if($currentPage =='dashboard'){echo 'active';}?>js-arrow" href="index.php">
+                        <!-- <li class=" has-sub">
+                            <a class="js-arrow" href="index.php">
                                 <i class="fas fa-tachometer-alt"></i>Dashboard</a>
-                        </li>
+                        </li> -->
                         <li class="has-sub">
                             <a class="js-arrow" href="#">
                                 <i class="fas fa-chart-bar"></i>Product<i class="fas fa-caret-down caret"></i></a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
-                                    <a href="add_product.php" class="<?php if($currentPage =='add_product'){echo 'active';}?>">Add new Product</a>
+                                    <a href="add_product.php" class="">Add new Product</a>
                                 </li>
                                 <li>
-                                    <a href="view_product.php" class="<?php if($currentPage =='product_report'){echo 'active';}?>">Product Report</a>
+                                    <a href="view_product.php" class="">Product Report</a>
                                 </li>
                             </ul>
                         </li>
@@ -184,6 +198,23 @@
                                 </li>
                             </ul>
                         </li>
+                        
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-table"></i>CRM<i class="fas fa-caret-down caret"></i></a>
+                            <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                <li>
+                                    <a href="add_customer.php">Add Customer</a>
+                                </li>
+                                <li>
+                                    <a href="view_customer.php">Customer List</a>
+                                </li>
+                                <li>
+                                    <a href="view_customer_due.php">Customer Due</a>
+                                </li>
+                            </ul>
+                        </li>
+
                         <li class="has-sub">
                             <a class="js-arrow" href="#">
                                 <i class="far fa-check-square"></i>Expense<i class="fas fa-caret-down caret"></i></a>
@@ -196,38 +227,20 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-table"></i>CRM<i class="fas fa-caret-down caret"></i></a>
-                            <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                <li>
-                                    <a href="add_customer.php">Add Customer</a>
-                                </li>
-                                <li>
-                                    <a href="view_customer.php">Customer List</a>
-                                </li>
-                            </ul>
+
+                        <?php 
+                        if($user_id==0){
+                        ?>
+                        <li>
+                            <a href="profitloss.php">
+                                <i class="fas fa-calendar-alt"></i>Profit/Loss</a>
                         </li>
-                        <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="far fa-check-square"></i>Loss/Profit<i class="fas fa-caret-down caret"></i></a>
-                            <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                <li>
-                                    <a href="#">Daily Basis</a>
-                                </li>
-                                <li>
-                                    <a href="#">Monthly Basis</a>
-                                </li>
-                                <li>
-                                    <a href="#">Yearly Basis</a>
-                                </li>
-                            </ul>
-                        </li>
+                        <?php } ?>
                        <!--  <li>
                             <a href="#">
                                 <i class="fas fa-calendar-alt"></i>Reports</a>
                         </li> -->
-                        <li class="has-sub">
+                        <!-- <li class="has-sub">
                             <a class="js-arrow" href="#">
                                 <i class="fas fa-copy"></i>Users<i class="fas fa-caret-down caret"></i></a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
@@ -239,7 +252,7 @@
                                 </li>
                                 
                             </ul>
-                        </li>
+                        </li> -->
                     </ul>
                 </nav>
             </div>
@@ -314,22 +327,30 @@
                                             <div class="info clearfix">
                                                 <div class="image">
                                                     <a href="#">
-                                                        <img src="images/icon/download.png" alt="Shop Mnagement" />
+                                                        <img src="images/icon/download.png" alt="Sharif Stationary" />
                                                     </a>
                                                 </div>
                                                 <div class="content">
-                                                    <h5 class="name">
-                                                        <a href="#">Sharif Stationary</a>
-                                                    </h5>
-                                                    <span class="email">Demo@example.com</span>
+                                                    <h4 class="name">
+                                                        <a href="#"><?php echo '<b>'.$user_name.'</b>'; ?></a>
+                                                    </h4>
+                                                    <span class="email">  </span>
                                                 </div>
                                             </div>
+                                            <?php 
+                                            if($user_id==0){
+                                            ?>
                                             <div class="account-dropdown__body">
                                                 <div class="account-dropdown__item">
                                                     <a href="account_setings.php">
-                                                        <i class="zmdi zmdi-account"></i>Account</a>
+                                                        <i  class="fas fa-copy"></i>User List
+                                                    </a>
+                                                    <a href="add_new_user.php"> <i class="zmdi zmdi-account"></i> Add New Users
+                                                    </a>
+
                                                 </div>                                             
                                             </div>
+                                        <?php } ?>
                                             <div class="account-dropdown__footer">
                                                 <a href="logout.php">
                                                     <i class="zmdi zmdi-power"></i>Logout</a>

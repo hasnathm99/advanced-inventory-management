@@ -30,6 +30,34 @@ if (isset($_POST["getNewOrderItem"])) {
 //Get price and qty of one item
 if (isset($_POST["getPriceAndQty"])) {
 	$m = new Manage();
+
+	// for($count = 0; $count < count($_POST["pro_name"]); $count++)
+	//  {  
+	//   $query = "INSERT INTO sales 
+	//   (pid, order_date, cust_name, pro_name, qty, price, sub_total, discount, net_total, paid, due) 
+	//   VALUES (:pid, :order_date, :cust_name, :pro_name, :qty, :price, :sub_total, :discount, :net_total, :paid, :due)
+	//   ";
+	//   $statement = $connect->prepare($query);
+	//   $statement->execute(
+
+	//    array(
+	//     ':pid'  => $pid,
+	//     ':order_date'  => $order_date,
+	//     ':cust_name'  => $_POST["cust_name"],
+	//     ':pro_name'  => $_POST["pro_name"][$count],
+	//     ':qty' => $qty, 
+	//     ':price' => $price,
+	//     ':sub_total' => $_POST["sub_total"][$count], 
+	//     ':discount' => $_POST["discount"][$count], 
+	//     ':net_total' => $_POST["net_total"][$count], 
+	//     ':paid' => $paid, 
+	//     ':due' => $due
+	     
+	//    )
+	//   );
+	//  }
+	//  $result = $statement->fetchAll();
+
 	$result = $m->getSingleRecord("purchase","id",$_POST["id"]);
 	echo json_encode($result);
 	exit();

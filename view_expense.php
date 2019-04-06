@@ -43,9 +43,9 @@ require_once('include\db_connect.php');
                                                 <td><?php echo $row['amount']; ?></td>
                                                 <td><?php echo $row['remarks']; ?></td>
                                                 <td><?php echo $row['date']; ?></td>
-                                                <td><a href="inc.process\edit_expense_process.php?id=<?php echo $row['id']; ?>"><button type="button" class="btn btn-success">Edit</button></a></td>
+                                                <td><a href="inc.process/edit_expense_process.php?id=<?php echo $row['id']; ?>"><button type="button" class="btn btn-success">Edit</button></a></td>
 
-                                                <td><a href="inc.process/delete_product.php?id=<?php echo $row['id']; ?>"><button type="button" class="btn btn-danger" onclick=" return confirm('Sure you want to delete???');" >Delete</button></a></td>
+                                                <td><a href="inc.process/delete_expense_process.php?id=<?php echo $row['id']; ?>"><button type="button" class="btn btn-danger" >Delete</button></a></td>
                                                 
                                             <?php } ?>
                                             </tr>

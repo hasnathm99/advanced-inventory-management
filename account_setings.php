@@ -1,19 +1,9 @@
+<?php include 'include/header.php'; ?>
 <?php
-ob_start();
-session_start();
-if(!isset($_SESSION['user_id'])){
-  echo '<h2 style="color:#C9302C">Log in First<h2>';
-  header('Location:login.php');
-  
-  die();
-}
 require_once('include/db_connect.php');
-$query="select * from users";
-$query_run=mysqli_query($connect , $query);
+
 
 ?>
-<?php include 'include/header.php'; ?>
-
             <!-- MAIN CONTENT-->
             <div class="main-content">
                 <div class="section__content section__content--p30">

@@ -1,8 +1,9 @@
-<!-- <?php
+ <?php
+ob_start();
 session_start();
 require_once('include/db_connect.php');
 
-?> -->
+?> 
 <!doctype html>
 <html>
     <head>
@@ -26,6 +27,7 @@ require_once('include/db_connect.php');
         </div>
     </body>
 </html>
+
 <?php
 if(isset($_POST["name"]) and isset($_POST["password"])){
 
@@ -46,19 +48,25 @@ if(isset($_POST["name"]) and isset($_POST["password"])){
                 while($row=mysqli_fetch_array($query_run)){
                     $old_name=$row['name'];
                     $old_password=$row['password'];
-                }
-                if($old_name==$name and $old_password==$password ){
-                    $_SESSION['user_id']=$password;
+                    $user_id=$row['user_control_level'];
+                    $user_name=$row['name'];
+
+                    if($old_name==$name and $old_password==$password ){
+                    $_SESSION['user_id']=$user_id;
+                    $_SESSION['user_name']=$user_name;
                     header('location:index.php');
                 }else{
                     $message="Wrong Information";
                     ?>
-                    <script>
-                        var message= " <?php echo $message; ?> ";
-                        alert(message);
-                    </script>
+                    
                     <?php
                 }
+                }
+                
             }
         }
 ?>
+<script>
+    var message= " <?php echo $message; ?> ";
+    alert(message);
+</script>

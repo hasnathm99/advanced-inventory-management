@@ -1,7 +1,6 @@
 <?php
-require_once('include\db_connect.php');
-?>
-<?php require 'include/header.php' ?>
+require_once('include/db_connect.php');
+require 'include/header.php' ?>
             <!-- HEADER DESKTOP-->
 
             <!-- MAIN CONTENT-->
@@ -10,7 +9,7 @@ require_once('include\db_connect.php');
                     <div class="container-fluid">
                         <!-- Start to Copy From Here -->
                             
-                                <form action="inc.process\add_product_process.php" method="POST" enctype="multipart/form-data">
+                                <form action="inc.process/add_product_process.php" method="POST" enctype="multipart/form-data">
                                     <div class="col-lg-10">
                                         <div class="card">
                                             <div class="card-header"><b>Product Information</b></div>
@@ -30,7 +29,15 @@ require_once('include\db_connect.php');
                                                     </div>
                                                     <div class="form-group has-success">
                                                         <label for="product_unit" class="control-label mb-1">Product Unit</label>
-                                                        <input id="product_unit" name="product_unit" type="text" class="form-control " >
+                                                        <select id="product_unit" name="unit_type" type="text" class="form-control " >
+                                                          
+                                                          <option value="Kilogram">Kilogram</option>
+                                                          <option value="Piece">Piece</option>
+                                                          <option value="Packet">Packet</option>
+                                                          <option value="Carton">Carton</option>
+                                                        </select>
+
+                                                        
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="product_image" class="control-label mb-1">Images</label>

@@ -1,7 +1,7 @@
 <?php
-require_once('include\db_connect.php');
+require_once('include/db_connect.php');
 ?>
-<?php require 'include\header.php' ?>
+<?php require 'include/header.php' ?>
             <!-- HEADER DESKTOP-->
 
             <!-- MAIN CONTENT-->
@@ -22,8 +22,6 @@ require_once('include\db_connect.php');
                                                 <th>Company Name</th>
                                                 <th>Customer Name</th>
                                                 <th>Phone No 1</th>
-                                                <th>Phone No 2</th>
-                                                <th>Address</th>
                                                 <th colspan="3" style="text-align: center;">Action</th>                               
                                             </tr>
                                         </thead>
@@ -67,13 +65,12 @@ require_once('include\db_connect.php');
                                                 <td><?php echo $row['company_name']; ?></td>
                                                 <td><?php echo $row['customer_name']; ?></td>
                                                 <td><?php echo $row['phn_no_1']; ?></td>
-                                                <td><?php echo $row['address']; ?></td>
 
-                                                <td><a href="#"><button type="button" class="btn btn-info">Details</button></a></td>
+                                                <td><a href="inc.process/view_customer_details.php?id=<?php echo $row['id']; ?>"><button type="button" class="btn btn-info">Details</button></a></td>
 
-                                                <td><a href="inc.process\edit_product_process.php?id=<?php echo $row['id']; ?>"><button type="button" class="btn btn-success">Edit</button></a></td>
+                                                <td><a href="inc.process/edit_customer_process.php?id=<?php echo $row['id']; ?>"><button type="button" class="btn btn-success">Edit</button></a></td>
 
-                                                <td><a href="#"><button type="button" class="btn btn-danger">Delete</button></a></td>
+                                                <td><a href="inc.process/delete_customer_process.php?id=<?php echo $row['id']; ?>"><button type="button" class="btn btn-danger">Delete</button></a></td>
                                                 
 
                                             <?php  

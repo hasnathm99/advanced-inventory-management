@@ -1,5 +1,5 @@
 <?php
-require_once('include\db_connect.php');
+require_once('include/db_connect.php');
 ?>
 <?php require 'include/header.php' ?>
             <!-- HEADER DESKTOP-->
@@ -21,7 +21,7 @@ require_once('include\db_connect.php');
                                                 <th>SL NO</th>
                                                 <th>Product Name</th>
                                                 <th>Product Description</th>
-                                                <th>Product Unit</th>
+                                                <th>Unit Type</th>
                                                 <th>Product Images</th>
                                                 <th colspan="2" style="text-align: center;">Action</th>                               
                                             </tr>
@@ -65,10 +65,10 @@ require_once('include\db_connect.php');
                                                 <td><?php echo $counter; ?></td>
                                                 <td><?php echo $row['product_name']; ?></td>
                                                 <td><?php echo $row['product_description']; ?></td>
-                                                <td><?php echo $row['product_unit']; ?></td>
+                                                <td><?php echo $row['unit_type']; ?></td>
                                                 <td><?php echo $row['product_image']; ?></td>
 
-                                                <td><a href="inc.process\edit_product_process.php?id=<?php echo $row['id']; ?>"><button type="button" class="btn btn-success">Edit</button></a></td>
+                                                <td><a href="inc.process/edit_product_process.php?id=<?php echo $row['id']; ?>"><button type="button" class="btn btn-success">Edit</button></a></td>
 
                                                 <td ><a  class="btn btn-danger" href="inc.process/delete_product.php?id=<?php echo $row['id']; ?>"  >Delete</a></td>
                                                 

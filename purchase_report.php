@@ -1,13 +1,23 @@
-<?php
-require_once('include\db_connect.php');
+<?php 
+$currentPage = 'product_report';
+include 'include/header.php' ;
+require_once('include/db_connect.php');
+
+if(!isset($_SESSION['user_id'])){
+  echo '<h2 style="color:#C9302C">Log in First<h2>';
+  header('Location: login.php');
+  die();
+ }
+ 
+
+$user_id=$_SESSION['user_id'];
+$user_name=$_SESSION['user_name'];
 ?>
 <style>
     th{
         font-size: 15px;
     }
 </style>
-
-<?php $currentPage = 'product_report'; include 'include/header.php' ?>
             <!-- HEADER DESKTOP-->
 
             <!-- MAIN CONTENT-->
@@ -26,12 +36,15 @@ require_once('include\db_connect.php');
                                                         <th >SL NO</th>
                                                         <th>Supplier</th>
                                                         <th>Product</th>
-                                                        <th>Quantity</th>
-                                                        <th>Buy Price</th>
-                                                        <th>sale Price</th>
+                                                        <th>Buy Rate</th>
                                                         <th>Date</th>
-                                                        <th>edit</th>
-                                                        <th>delete</th>
+                                                        <?php
+                                                        if($user_id == 0){
+                                                            echo ' <th colspan="3"> Action</th>';
+                                                        }else{
+                                                            echo ' <th > Action</th>';
+                                                        }
+                                                        ?>
                                                                                        
                                                     </tr>
                                                 </thead>
@@ -48,17 +61,28 @@ require_once('include\db_connect.php');
                                                         <td ><?php echo $counter; ?></td>
                                                         <td><?php echo $row['supplier_name']; ?></td>
                                                         <td><?php echo $row['product_name']; ?></td>
-                                                        <td><?php echo $row['qty']; ?></td>
                                                         <td><?php echo $row['buy_price']; ?></td>
-                                                        <td><?php echo $row['sale_price']; ?></td>
                                                         <td ><?php echo date("d-m-Y", strtotime($row['order_date']));?></td>
-                                                        <td>
+                                                        <!-- <td>
                                                             <a href="inc.process/edit_purchase_report_process.php?id=<?php echo $row['id']; ?>"><button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button></a>
                                                            
                                                         </td>
+                                                        <td>
+                                                             <a href="inc.process/delete_purchase_report.php?id=<?php echo $row['id']; ?>"><button type="button" class="btn btn-danger" ><i class="fas fa-trash-alt"></i></button></a>
 
+                                                        </td> -->
                                                         
-                                                        
+                                                        <?php
+                                                        if($user_id == 0){
+                                                            echo '<td><a href="inc.process/view_purchase_details.php?id='.$row['id'].'"><button type="button" class="btn btn-info"><i class="fas fa-eye"></i></button></a></td>';
+                                                            echo '<td><a href="inc.process/edit_purchase_report_process.php?id='.$row['id'].'"><button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button></a></td>';
+
+                                                            echo '<td><a href="inc.process/delete_purchase_report.php?id='.$row['id'].'"><button type="button" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button></a></td>';
+                                                        }else{
+                                                            echo '<td><a href="inc.process/view_purchase_details.php?id='.$row['id'].'"><button type="button" class="btn btn-info"><i class="fas fa-eye"></i></button></a></td>';
+                                                        }
+                                                        ?>
+
 
                                                     <?php  
                                                     } ?>

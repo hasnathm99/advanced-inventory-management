@@ -1,3 +1,17 @@
+<?php
+ob_start();
+session_start();
+
+if(!isset($_SESSION['user_id'])){
+  echo '<h2 style="color:#C9302C">Log in First<h2>';
+  header('Location: login.php');
+  die();
+ }
+require_once('db_connect.php');
+$user_id=$_SESSION['user_id'];
+$user_name=$_SESSION['user_name'];
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -135,7 +149,7 @@
                 <nav class="navbar-sidebar">
                     <ul class="list-unstyled navbar__list">
                         <li class=" has-sub">
-                            <a class="<?php if($currentPage =='dashboard'){echo 'active';}?>js-arrow" href="../index.php">
+                            <a class="" href="../index.php">
                                 <i class="fas fa-tachometer-alt"></i>Dashboard</a>
                         </li>
                         <li class="has-sub">
@@ -143,10 +157,10 @@
                                 <i class="fas fa-chart-bar"></i>Product<i class="fas fa-caret-down caret"></i></a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
-                                    <a href="../add_product.php" class="<?php if($currentPage =='add_product'){echo 'active';}?>">Add new Product</a>
+                                    <a href="../add_product.php" class="">Add new Product</a>
                                 </li>
                                 <li>
-                                    <a href="../view_product.php" class="<?php if($currentPage =='product_report'){echo 'active';}?>">Product Report</a>
+                                    <a href="../view_product.php" class="">Product Report</a>
                                 </li>
                             </ul>
                         </li>

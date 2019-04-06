@@ -33,7 +33,7 @@ require_once('include\db_connect.php');
                                             </div>
                                             <div class="form-group">
                                                 <label for="date" class="control-label mb-1">Date</label>
-                                                <input id="date" name="date" type="date" class="form-control " required="enter date">
+                                                <input id="date" name="date" type="date" class="form-control " value="<?php echo date("Y-m-d"); ?>" required>
                                             </div>
                                             
                                             <div>

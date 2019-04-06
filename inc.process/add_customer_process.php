@@ -18,10 +18,10 @@ if(isset($_POST['submit'])){
 		$query_run=mysqli_query($connect ,$query);
 		if($query_run){
 			$message="Customer Added Successfully";
-			header( "refresh:0;url=../view_product.php" );
+			header( "refresh:0;url=../view_customer.php" );
 		}else{
 			$message="Can Not Add Customer.Try Again...";
-			header( "refresh:0;url=../add_product.php" );
+			header( "refresh:0;url=../add_customer.php" );
 		}
 	}else{
 		$message="Please fill all fields.";

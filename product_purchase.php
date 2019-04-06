@@ -1,7 +1,17 @@
 <?php
 //index.php
+include 'include/header.php';
+
+if(!isset($_SESSION['user_id'])){
+  echo '<h2 style="color:#C9302C">Log in First<h2>';
+  header('Location: login.php');
+  die();
+ }
+
 
 $connect = new PDO("mysql:host=localhost;dbname=inventory_management_system", "root", "");
+
+//function to get product names
 function fill_unit_select_box($connect)
 { 
  $output = '';
@@ -15,14 +25,24 @@ function fill_unit_select_box($connect)
  }
  return $output;
 }
-$month = date('m');
-$day = date('d');
-$year = date('Y');
 
-$today = $year . '-' . $month . '-' . $day;
+//function to get unit type
+function fill_unit_type_box($connect)
+{ 
+ $output = '';
+ $query = "SELECT * FROM unit_type";
+ $statement = $connect->prepare($query);
+ $statement->execute();
+ $result = $statement->fetchAll();
+ foreach($result as $row)
+ {
+  $output .= '<option value="'.$row["name"].'">'.$row["name"].'</option>';
+ }
+ return $output;
+}
 
 ?>
-<?php $currentPage = 'add_product'; include 'include/header.php' ?>
+<?php $currentPage = 'add_product';  ?>
                         <!-- Start to Copy From Here -->
 
                             <form method="POST" id="insert_form">
@@ -44,7 +64,7 @@ $today = $year . '-' . $month . '-' . $day;
                                                         <div class="col-12">
                                                             <label for="supplier_name" class="control-label mb-1">Supplier Name</label>
                                                             <div class="input-group">
-                                                                <input id="supplier_name" name="supplier_name" type="text" class="form-control">
+                                                                <input id="supplier_name" name="supplier_name" type="text" class="form-control" required>
                                                             </div>
                                                         </div>
                                                         <!-- <div class="col-6">
@@ -61,18 +81,11 @@ $today = $year . '-' . $month . '-' . $day;
                                                         </div> -->
                                                     </div>
                                                     <div class="row">
-                                                        
-                                                        <!-- <div class="col-6">
-                                                            <label for="order_no" class="control-label mb-1">Order No</label>
-                                                            <div class="input-group">
-                                                                <input id="order_no" name="order_no" type="text" class="form-control ">
 
-                                                            </div>
-                                                        </div> -->
                                                         <div class="col-6">
                                                             <div class="form-group">
                                                                 <label for="order_date" class="control-label mb-1">Order Date</label>
-                                                                <input id="order_date" name="order_date" type="date" class="form-control" value="<?php echo $today; ?>" >
+                                                                <input id="order_date" name="order_date" type="date" class="form-control" value="<?php echo date("Y-m-d"); ?>">
                                                                 
                                                             </div>
                                                         </div>
@@ -87,8 +100,8 @@ $today = $year . '-' . $month . '-' . $day;
                                                     <tr>
                                                         <th>Product Name</th>
                                                         <th>Quantity</th>
+                                                        <th>Unit Type</th>
                                                         <th>Buy Price</th>
-                                                        <th>Sale Price</th>
                                                         <th></th>
                                                         
                                                     </tr>
@@ -127,7 +140,7 @@ $today = $year . '-' . $month . '-' . $day;
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="copyright">
-                                    <p>Copyright © 2018 Utshab Technologies. All rights reserved. Template by <a href="https://colorlib.com">Utshab Technologies</a>.</p>
+                                    <p>Copyright © 2019 Hasnath Rahman  &  Sudipta Mondal. All rights reserved. Template by <a href="#"></a>Hasnath Rahman  &  Sudipta Mondal</p>
                                 </div>
                             </div>
                         </div>
@@ -150,8 +163,10 @@ $today = $year . '-' . $month . '-' . $day;
   html += '<tr>';
   html += '<td><select name="product_name[]" class="pu-input product_name"><option value="">--Select--</option><?php echo fill_unit_select_box($connect); ?></select></td>';
   html += '<td><input type="text" name="qty[]" class="pu-input ream"></td>';
+
+  html += '<td><select name="unit_type[]" class="pu-input unit_type"><option value="">--Select--</option><?php echo fill_unit_type_box($connect); ?></select></td>';
+
   html += '<td><input type="text" name="buy_price[]" class="pu-input unit_price"></td>';
-  html += '<td><input type="text" name="sale_price[]" class="pu-input total"></td>';
   html += '<td><button type="button" name="remove" class="btn btn-danger btn-sm remove"><span><i class="fas fa-minus"></i></span></button></td></tr>';
 $('#item_table').append(html);
  });
@@ -232,7 +247,8 @@ $('#item_table').append(html);
       
       // $('#error').html('<div class="alert alert-success">Item Details Saved</div>');
       alert('Information Saved Successfully');
-      location.reload();
+      var url = "inc.process/purchase_update_stock_process.php";    
+      $(location).attr('href',url);
      }
     }
    });

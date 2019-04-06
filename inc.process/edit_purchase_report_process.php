@@ -35,16 +35,16 @@ $id=$_GET['id'];
                                                 <input id="supplier_name" name="supplier_name" type="text" class="form-control" value="<?php echo $supplier_name; ?>" >
                                             </div>
                                             <div class="form-group">
-                                                <label for="product_name" class="control-label ">Product Name (<?php echo '<b>'.$product_name.'</b>'; ?>)<b style="color: red" >Must Required</b></label>
-                                                <select  name="product_name" id="product_name" class="form-control" required >
-                                                    <option value="NULL" ></option>
+                                                <label for="product_name" class="control-label ">Product Name (<?php echo $product_name; ?>)</label>
+                                                <select  name="product_name" required id="product_name" class="form-control" >
+                                                    <option value="<?php echo $row['product_name']; ?>" required ></option>
                                                     <?php
                                                     $query="select * from product ";
                                                     $query_run=mysqli_query($connect,$query);
                                                     $row_count=mysqli_num_rows($query_run);
                                                     while($row=mysqli_fetch_array($query_run)){
                                                         ?>
-                                                        <option value="<?php echo $row['product_name']; ?>" > <?php echo $row['product_name']; ?></option >
+                                                        <option required value="<?php echo $row['product_name']; ?>" > <?php echo $row['product_name']; ?></option >
                                                         <?php
                                                     }
                                                     ?>
@@ -57,15 +57,15 @@ $id=$_GET['id'];
                                             </div>
                                             <div class="form-group has-success">
                                                 <label for="qty" class="control-label mb-1"> Quantity(<?php echo $qty; ?>)</label>
-                                                <input id="qty" name="qty" type="text" class="form-control " >
+                                                <input id="qty" name="qty" type="text" class="form-control " required >
                                             </div>
                                             <div class="form-group">
                                                 <label for="buy_price" class="control-label mb-1">Buy Price(<?php  echo $buy_price; ?>)</label>
-                                                <input id="buy_price" name="buy_price" type="text" class="form-control " >
+                                                <input id="buy_price" name="buy_price" type="text" class="form-control " required>
                                             </div>
                                             <div class="form-group">
                                                 <label for="sale_price" class="control-label mb-1">Sale Price(<?php echo $sale_price; ?>)</label>
-                                                <input id="sale_price" name="sale_price" type="text" class="form-control " >
+                                                <input id="sale_price" name="sale_price" type="text" class="form-control " required>
                                             </div>
                                             
                                             <div>

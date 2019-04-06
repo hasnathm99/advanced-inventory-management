@@ -1,19 +1,16 @@
 <?php
-ob_start();
-session_start();
+include 'include/header.php'; 
+require('include/db_connect.php');
+
 
 if(!isset($_SESSION['user_id'])){
   echo '<h2 style="color:#C9302C">Log in First<h2>';
   header('Location: login.php');
-  
   die();
-}
+ }
 
 ?>
-
-<?php $currentPage = 'dashboard'; include 'include/header.php'; ?>
             <!-- HEADER DESKTOP-->
-
             <!-- MAIN CONTENT-->
             <div class="main-content">
                 <div class="section__content section__content--p30">
@@ -91,6 +88,7 @@ if(!isset($_SESSION['user_id'])){
                                             </div>
                                             <div class="text">
                                                 <h2>$1,060,386</h2>
+
                                                 <span>total earnings</span>
                                             </div>
                                         </div>
