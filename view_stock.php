@@ -39,7 +39,7 @@ require_once('include/db_connect.php');
                                                                                          
                                             </tr>
                                             <?php } ?>
-                                            </tr>
+                                            
                                         </tbody>
                                     </table>
                                 </div>

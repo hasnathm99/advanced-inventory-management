@@ -333,6 +333,11 @@ $user_name=$_SESSION['user_name'];
                                                 <div class="content">
                                                     <h4 class="name">
                                                         <a href="#"><?php echo '<b>'.$user_name.'</b>'; ?></a>
+                                                        <p><?php if($user_id==0){
+                                                            echo 'Admin';
+                                                        }else{
+                                                            echo 'User';
+                                                        } ?></p>
                                                     </h4>
                                                     <span class="email">  </span>
                                                 </div>
@@ -363,3 +368,4 @@ $user_name=$_SESSION['user_name'];
                     </div>
                 </div>
             </header>
+        

@@ -141,17 +141,14 @@ $user_name=$_SESSION['user_name'];
         <!-- MENU SIDEBAR-->
         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
-                <a href="index.php">
+                <a href="../index.php">
                     <h3>Sharif Stationary</h3>
                 </a>
             </div>
             <div class="menu-sidebar__content js-scrollbar1">
                 <nav class="navbar-sidebar">
                     <ul class="list-unstyled navbar__list">
-                        <li class=" has-sub">
-                            <a class="" href="../index.php">
-                                <i class="fas fa-tachometer-alt"></i>Dashboard</a>
-                        </li>
+                        
                         <li class="has-sub">
                             <a class="js-arrow" href="#">
                                 <i class="fas fa-chart-bar"></i>Product<i class="fas fa-caret-down caret"></i></a>
@@ -200,6 +197,21 @@ $user_name=$_SESSION['user_name'];
                         </li>
                         <li class="has-sub">
                             <a class="js-arrow" href="#">
+                                <i class="fas fa-table"></i>CRM<i class="fas fa-caret-down caret"></i></a>
+                            <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                <li>
+                                    <a href="../add_customer.php">Add Customer</a>
+                                </li>
+                                <li>
+                                    <a href="../view_customer.php">Customer List</a>
+                                </li>
+                                <li>
+                                    <a href="../view_customer_due.php">Customer Due</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#">
                                 <i class="far fa-check-square"></i>Expense<i class="fas fa-caret-down caret"></i></a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
@@ -210,38 +222,19 @@ $user_name=$_SESSION['user_name'];
                                 </li>
                             </ul>
                         </li>
-                        <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="far fa-check-square"></i>Loss/Profit<i class="fas fa-caret-down caret"></i></a>
-                            <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                <li>
-                                    <a href="#">Daily Basis</a>
-                                </li>
-                                <li>
-                                    <a href="#">Monthly Basis</a>
-                                </li>
-                                <li>
-                                    <a href="#">Yearly Basis</a>
-                                </li>
-                            </ul>
+                        <?php 
+                        if($user_id==0){
+                        ?>
+                        <li>
+                            <a href="../profitloss.php">
+                                <i class="fas fa-calendar-alt"></i>Profit/Loss</a>
                         </li>
+                        <?php } ?>
                        <!--  <li>
                             <a href="#">
                                 <i class="fas fa-calendar-alt"></i>Reports</a>
                         </li> -->
-                        <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-copy"></i>Users<i class="fas fa-caret-down caret"></i></a>
-                            <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                <li>
-                                    <a href="../login.html">Add New Users</a>
-                                </li>
-                                <li>
-                                    <a href="../register.html">User List</a>
-                                </li>
-                                
-                            </ul>
-                        </li>
+                        
                     </ul>
                 </nav>
             </div>
@@ -304,13 +297,13 @@ $user_name=$_SESSION['user_name'];
                                         </div>
                                     </div>
                                 </div>
-                                <div class="account-wrap">
+                                 <div class="account-wrap">
                                     <div class="account-item clearfix js-item-menu">
                                         <div class="image">
                                             <img src="../images/icon/download.png" alt="Sharif Stationary" />
                                         </div>
                                         <div class="content">
-                                            <a class="js-acc-btn" href="#">Sharif Stationary</a>
+                                            <a class="js-acc-btn" href="#">Shop Management</a>
                                         </div>
                                         <div class="account-dropdown js-dropdown">
                                             <div class="info clearfix">
@@ -320,18 +313,26 @@ $user_name=$_SESSION['user_name'];
                                                     </a>
                                                 </div>
                                                 <div class="content">
-                                                    <h5 class="name">
-                                                        <a href="#">Sharif Stationary</a>
-                                                    </h5>
-                                                    <span class="email">Demo@example.com</span>
+                                                    <h4 class="name">
+                                                        <a href="#"><?php echo '<b>'.$user_name.'</b>'; ?></a>
+                                                    </h4>
+                                                    <span class="email"></span>
                                                 </div>
                                             </div>
+                                            <?php 
+                                            if($user_id==0){
+                                            ?>
                                             <div class="account-dropdown__body">
                                                 <div class="account-dropdown__item">
                                                     <a href="../account_setings.php">
-                                                        <i class="zmdi zmdi-account"></i>Account</a>
+                                                        <i  class="fas fa-copy" ></i>User List
+                                                    </a>
+                                                    <a href="../add_new_user.php"> <i class="zmdi zmdi-account"></i> Add New Users
+                                                    </a>
+
                                                 </div>                                             
                                             </div>
+                                        <?php } ?>
                                             <div class="account-dropdown__footer">
                                                 <a href="../logout.php">
                                                     <i class="zmdi zmdi-power"></i>Logout</a>

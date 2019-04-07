@@ -1,5 +1,5 @@
 <?php
-require_once('include\db_connect.php');
+require_once('include/db_connect.php');
 ?>
 <?php require 'include/header.php' ?>
             <!-- HEADER DESKTOP-->

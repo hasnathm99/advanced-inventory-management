@@ -1,13 +1,6 @@
-<?php require 'include/header.php' ?>
 <?php 
-// if(!isset($_SESSION['user_id'])){
-//   echo '<h2 style="color:#C9302C">Log in First<h2>';
-//   header('refresh:1 ; url=login.php');
-//   die();
-// }
 
-// $user_id=$_SESSION['user_id'];
-
+require 'include/header.php';
 include('include/db_connect.php');
 ?>
                         <!-- Start to Copy From Here -->

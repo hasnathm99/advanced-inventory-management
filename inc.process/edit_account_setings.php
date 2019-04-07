@@ -1,8 +1,8 @@
 <?php
+include 'header.php'; 
 require_once('db_connect.php');
 $id=$_GET['id'];
 ?>
-<?php include 'header.php'; ?>
 
             <!-- MAIN CONTENT-->
             <div class="main-content">

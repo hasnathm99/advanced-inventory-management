@@ -101,7 +101,7 @@ function fill_unit_type_box($connect)
                                                         <th>Product Name</th>
                                                         <th>Quantity</th>
                                                         <th>Unit Type</th>
-                                                        <th>Buy Price</th>
+                                                        <th>Price Rate</th>
                                                         <th></th>
                                                         
                                                     </tr>

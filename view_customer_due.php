@@ -1,7 +1,15 @@
 <?php
-require_once('include\db_connect.php');
-?>
-<?php require 'include/header.php' ?>
+require_once('include/db_connect.php');
+require 'include/header.php';
+
+if(!isset($_SESSION['user_id'])){
+  echo '<h2 style="color:#C9302C">Log in First<h2>';
+  header('Location: login.php');
+  die();
+ }
+
+$user_id=$_SESSION['user_id'];
+ ?>
             <!-- HEADER DESKTOP-->
 
             <!-- MAIN CONTENT-->
@@ -22,17 +30,13 @@ require_once('include\db_connect.php');
                                                 <th>Customer Name</th>
                                                 <th>Product Order Date</th>
                                                 <th>Product Name</th>
-                                                <th>Quantity</th>
-                                                <th>Total Price</th>
-                                                <th>Paid</th>
-                                                <th>Due</th>
-                                                <!-- <th colspan="2" style="text-align: center;">Action</th> -->                               
+                                                <th colspan="2" style="text-align: center;">Action</th>                               
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php
                                             $counter=0;
-                                            $query="select * from sales where due > 0 order by order_date desc";
+                                            $query="select * from sales where due > 0 and due_status='0' order by order_date desc";
                                             $query_run=mysqli_query($connect, $query);
                                             while($row=mysqli_fetch_array($query_run)){
                                                 $counter++;
@@ -43,10 +47,15 @@ require_once('include\db_connect.php');
                                                 <td><?php echo $row['cust_name'] ?></td>
                                                 <td ><?php echo date("d-m-Y", strtotime($row['order_date']));?></td>
                                                 <td><?php echo $row['pro_name']; ?></td>
-                                                <td><?php echo $row['qty']; ?></td>
-                                                <td><?php echo $row['net_total']; ?></td>
-                                                <td><?php echo $row['paid']; ?></td>
-                                                <td><?php echo $row['due']; ?></td>
+                                                <?php
+                                                if($user_id == 0){
+                                                    echo '<td><a href="inc.process/view_due_details.php?pid='.$row['pid'].'"><button type="button" class="btn btn-info"><i class="fas fa-eye"></i></button></a></td>';
+                                                    echo '<td><a href="inc.process/pay_due_process.php?id='.$row['pid'].'"><button type="button" class="btn btn-success"><i class="fab fa-amazon-pay"></i></button></a></td>';
+
+                                                }else{
+                                                    echo '<td><a href="inc.process/view_due_details.php?id='.$row['id'].'"><button type="button" class="btn btn-info"><i class="fas fa-eye"></i></button></a></td>';
+                                                }
+                                                ?>
                                                                                          
                                             </tr>
                                             <?php } ?>

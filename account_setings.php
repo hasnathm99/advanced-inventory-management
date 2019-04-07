@@ -1,7 +1,5 @@
-<?php include 'include/header.php'; ?>
-<?php
+<?php include 'include/header.php'; 
 require_once('include/db_connect.php');
-
 
 ?>
             <!-- MAIN CONTENT-->
@@ -42,7 +40,7 @@ require_once('include/db_connect.php');
                                                 
                                                 <td><a href="inc.process/edit_account_setings.php?id=<?php echo $row['id']; ?>"><button type="button" class="btn btn-success">Edit</button></a></td>
 
-                                                <td><a href="inc.process/delete_account_setings.php?id=<?php echo $row['id']; ?>"><button type="button" class="btn btn-danger" onclick=" return confirm('Sure you want to delete???');" >Delete</button></a></td>
+                                                <td><a href="inc.process/delete_account_setings.php?id=<?php echo $row['id']; ?>"><button type="button" class="btn btn-danger" >Delete</button></a></td>
                                                 
                                             <?php } ?>
                                             </tr>

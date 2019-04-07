@@ -18,10 +18,10 @@ if(isset($_POST['submit'])){
     $query_run=mysqli_query($connect, $query);
     if($query_run){
     	$message="Information Updated Successfully";
-    	header( "refresh:0;url=../include/account_setings.php" );
+    	header( "refresh:0;url=../account_setings.php" );
     }else{
     	$message="Can not Update Information.Try Again... ";
-    	header( "refresh:0;url=../include/account_setings.php" );
+    	header( "refresh:0;url=../account_setings.php" );
     }
 }
 
