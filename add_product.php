@@ -40,8 +40,16 @@ require 'include/header.php' ?>
                                                         
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="product_image" class="control-label mb-1">Images</label>
-                                                        <input id="product_image" name="product_image" type="text" class="form-control " disabled >
+                                                        <label for="buy_price" class="control-label mb-1">Buy Price</label>
+                                                        <input id="buy_price" name="buy_price" type="text" class="form-control " >
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="sale_price" class="control-label mb-1">Sale Price</label>
+                                                        <input id="sale_price" name="sale_price" type="text" class="form-control " >
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="stock" class="control-label mb-1">Stock</label>
+                                                        <input id="stock" name="stock" type="text" class="form-control " >
                                                     </div>
                                                     
                                                     <div>

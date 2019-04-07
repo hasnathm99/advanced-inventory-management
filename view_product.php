@@ -21,8 +21,15 @@ require_once('include/db_connect.php');
                                                 <th>SL NO</th>
                                                 <th>Product Name</th>
                                                 <th>Product Description</th>
+
                                                 <th>Unit Type</th>
                                                 <th>Product Images</th>
+
+                                                <th>Product Unit</th>
+                                                <th>Buy Price</th>
+                                                <th>Sale Price</th>
+                                                <th>Stock</th>
+
                                                 <th colspan="2" style="text-align: center;">Action</th>                               
                                             </tr>
                                         </thead>
@@ -65,10 +72,18 @@ require_once('include/db_connect.php');
                                                 <td><?php echo $counter; ?></td>
                                                 <td><?php echo $row['product_name']; ?></td>
                                                 <td><?php echo $row['product_description']; ?></td>
+
                                                 <td><?php echo $row['unit_type']; ?></td>
                                                 <td><?php echo $row['product_image']; ?></td>
 
                                                 <td><a href="inc.process/edit_product_process.php?id=<?php echo $row['id']; ?>"><button type="button" class="btn btn-success">Edit</button></a></td>
+
+                                                <td><?php echo $row['product_unit']; ?></td>
+                                                <td><?php echo $row['buy_price']; ?></td>
+                                                <td><?php echo $row['sale_price']; ?></td>
+                                                <td><?php echo $row['stock']; ?></td>
+                                                <td><a href="inc.process\edit_product_process.php?id=<?php echo $row['id']; ?>"><button type="button" class="btn btn-success">Edit</button></a></td>
+
 
                                                 <td ><a  class="btn btn-danger" href="inc.process/delete_product.php?id=<?php echo $row['id']; ?>"  >Delete</a></td>
                                                 
