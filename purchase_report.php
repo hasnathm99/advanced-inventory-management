@@ -36,11 +36,16 @@ $user_name=$_SESSION['user_name'];
                                                         <th >SL NO</th>
                                                         <th>Supplier</th>
                                                         <th>Product</th>
+                                                        <th>Quantity</th>
                                                         <th>Buy Rate</th>
                                                         <th>Date</th>
                                                         <?php
                                                         if($user_id == 0){
-                                                            echo ' <th colspan="3"> Action</th>';
+                                                            echo ' 
+                                                            <th></th>
+                                                            <th> Action</th>
+                                                            <th></th>
+                                                            ';
                                                         }else{
                                                             echo ' <th > Action</th>';
                                                         }
@@ -61,6 +66,7 @@ $user_name=$_SESSION['user_name'];
                                                         <td ><?php echo $counter; ?></td>
                                                         <td><?php echo $row['supplier_name']; ?></td>
                                                         <td><?php echo $row['product_name']; ?></td>
+                                                        <td><?php echo $row['qty']; ?></td>
                                                         <td><?php echo $row['buy_price']; ?></td>
                                                         <td ><?php echo date("d-m-Y", strtotime($row['order_date']));?></td>
                                                         <!-- <td>

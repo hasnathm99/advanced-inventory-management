@@ -13,7 +13,7 @@ require_once('include/db_connect.php');
                             <div class="col-md-12">
                                 <!-- DATA TABLE-->
                                 <div class="table-responsive m-b-40">
-                                    <table class="table table-borderless table-data3">
+                                    <table class="display" id="pagination">
                                         <h3>Stock Table</h3>
                                         <br>
                                         <thead>
@@ -108,6 +108,9 @@ require_once('include/db_connect.php');
 <!-- end document-->
 
 <script >
+    $(document).ready(function() {
+        $('#pagination').DataTable();
+    } );
     $(function() {
         $("#unit_price, #total_ream").on("keydown keyup", sum);
       function sum() {

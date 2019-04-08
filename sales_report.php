@@ -36,7 +36,10 @@ $user_name=$_SESSION['user_name'];
                                                     <th>Quantity</th>
                                                    <?php 
                                                    if($user_id == 0){
-                                                    echo ' <th colspan="3"> Action</th>';
+                                                    echo ' 
+                                                    <th></th>
+                                                    <th> Action</th>
+                                                    <th></th>';
                                                    }else{
                                                     echo ' <th > Action</th>';
                                                    }

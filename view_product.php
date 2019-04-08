@@ -32,7 +32,7 @@ require_once('include/db_connect.php');
                                                 $counter=0;
 
 
-                                                $result_per_page=5;
+                                                $result_per_page=20;
                                                 $query="select * from product";
                                                 $query_run=mysqli_query($connect, $query);
                                                 $number_of_result=mysqli_num_rows($query_run);
@@ -48,10 +48,10 @@ require_once('include/db_connect.php');
                                                 $query="select * from product limit " .$starting_limit_num.",".$result_per_page;
                                                 $query_run=mysqli_query($connect , $query);
 
-                                                
+                                                echo 'Go To Page ';
                                                 for($page=1;$page<=$number_of_page;$page++){
                                                 // echo 
-                                                echo 'Go To <a href="view_product.php?page=' .$page.' ">'. $page . '</a> ';
+                                                echo '<a class="btn" href="view_product.php?page=' .$page.' ">'. $page . '</a> ';
                                                  }
                                                 
                                                 // $query="select * from product";

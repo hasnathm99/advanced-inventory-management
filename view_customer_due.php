@@ -53,7 +53,7 @@ $user_id=$_SESSION['user_id'];
                                                     echo '<td><a href="inc.process/pay_due_process.php?id='.$row['pid'].'"><button type="button" class="btn btn-success"><i class="fab fa-amazon-pay"></i></button></a></td>';
 
                                                 }else{
-                                                    echo '<td><a href="inc.process/view_due_details.php?id='.$row['id'].'"><button type="button" class="btn btn-info"><i class="fas fa-eye"></i></button></a></td>';
+                                                    echo '<td><a href="inc.process/view_due_details.php?pid='.$row['pid'].'"><button type="button" class="btn btn-info"><i class="fas fa-eye"></i></button></a></td>';
                                                 }
                                                 ?>
                                                                                          
